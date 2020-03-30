@@ -1,9 +1,9 @@
 import React from "react";
 import "./Modal.css";
-import Auxiliary from "../../../hoc/Auxiliary";
+import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 import Backdrop from "../Backdrop/Backdrop";
 
-const Modal = (props) => {
+const Modal = React.memo((props) => {
   return (
     <Auxiliary>
       <Backdrop show={props.show} clicked={props.modalClosed} />
@@ -18,6 +18,7 @@ const Modal = (props) => {
       </div>
     </Auxiliary>
   );
-};
+});
 
+// export default useMemo(Modal);
 export default Modal;

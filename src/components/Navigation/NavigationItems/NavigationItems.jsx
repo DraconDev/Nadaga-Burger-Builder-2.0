@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./NavigationItems.scss";
+import classes from "./NavigationItems.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 
 const NavigationItems = (props) => {
   return (
-    <ul className="NavigationItems">
+    <ul className={classes.NavigationItems}>
       <NavigationItem link="/" active>
         Burger Builder
       </NavigationItem>

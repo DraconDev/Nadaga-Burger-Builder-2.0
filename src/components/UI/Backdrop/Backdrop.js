@@ -1,10 +1,10 @@
 import React from "react";
-import "./Backdrop.scss";
+import classes from "./Backdrop.module.css";
 
 const Backdrop = (props) => {
-  //   const Backdrop = <div className="Backdrop"></div>;
+  console.log("Backdrop", props);
   return props.show ? (
-    <div className="Backdrop" onClick={props.clicked}></div>
+    <div className={classes.Backdrop} onClick={props.clicked}></div>
   ) : null;
 };
 
