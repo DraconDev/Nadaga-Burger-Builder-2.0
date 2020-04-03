@@ -8,7 +8,7 @@ import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 // console.log(classes);
 
 const Layout = (props) => {
-  const [state, setState] = useState({ showSideDrawer: true });
+  const [state, setState] = useState({ showSideDrawer: false });
   const sideDrawerCloserHandler = () => {
     // setState({ ...state, showSideDrawer: !state.showSideDrawer });
     setState((prevState) => {
