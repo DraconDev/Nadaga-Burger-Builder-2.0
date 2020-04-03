@@ -12,6 +12,7 @@ const OrderSummary = (props) => {
     );
   });
 
+  
   useEffect(() => {
     console.log("OrderSummary", "Update test");
   });
