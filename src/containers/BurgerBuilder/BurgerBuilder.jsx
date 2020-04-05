@@ -15,7 +15,7 @@ const INGREDIENT_PRICES = {
   bacon: 0.7,
 };
 
-const BurgerBuilder = () => {
+const BurgerBuilder = (props) => {
   const [state, setState] = useState({
     // ingredients: {
     //   salad: 0,
@@ -43,7 +43,7 @@ const BurgerBuilder = () => {
     axios
       .get("https://burgerbuilder-7dafe.firebaseio.com/ingredients.json")
       .then((res) => {
-        console.log("res.data", res.data);
+        // console.log("res.data", res.data);
         setState({ ...state, ingredients: res.data, loadedIngredients: true });
       });
   }, []);
@@ -72,26 +72,40 @@ const BurgerBuilder = () => {
 
   const purchaseContinueHandler = () => {
     // alert("Continue");
-    setState({ ...state, loading: true });
-    const order = {
-      ingredients: state.ingredients,
-      price: state.totalPrice,
-      customer: {
-        name: "Max",
-        address: {
-          street: "test",
-          country: "test",
-        },
-        email: "test@test.com",
-      },
-      deliveryMethod: "fastest",
-    };
-    axios
-      .post("/orders.json", order)
-      .then((res) => setState({ ...state, loading: false, purchasing: false }))
-      .catch((error) =>
-        setState({ ...state, loading: false, purchasing: false })
+    // setState({ ...state, loading: true });
+    // const order = {
+    //   ingredients: state.ingredients,
+    //   price: state.totalPrice,
+    //   customer: {
+    //     name: "Max",
+    //     address: {
+    //       street: "test",
+    //       country: "test",
+    //     },
+    //     email: "test@test.com",
+    //   },
+    //   deliveryMethod: "fastest",
+    // };
+    // axios
+    //   .post("/orders.json", order)
+    //   .then((res) => setState({ ...state, loading: false, purchasing: false }))
+    //   .catch((error) =>
+    //     setState({ ...state, loading: false, purchasing: false })
+    //   );
+
+    //Query for sending list of ingredients data to the Checkout Component
+    const queryParams = [];
+    queryParams.push("price=" + state.totalPrice);
+    for (let item in state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(item) +
+          "=" +
+          encodeURIComponent(state.ingredients[item])
       );
+    }
+    const QueryString = queryParams.join("&");
+
+    props.history.push({ pathname: "/checkout", search: "?" + QueryString });
   };
 
   const removeIngredientHandler = (type) => {
